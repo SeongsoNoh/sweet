@@ -40,15 +40,11 @@ const Home: NextPage = () => {
   const [uploadTweet, { loading: uploadTweetLoading, data: uploadTweetData }] =
     useMutation<UploadTweetMutaite>("/api/tweet");
   const onValid = (validForm: UploadTweet) => {
-    // if (!uploadTweetLoading) return;
     uploadTweet(validForm);
-    console.log(validForm);
   };
   useEffect(() => {
     if (uploadTweetData?.ok) {
-      // router.push(`/tweet/${uploadTweetData.tweet.id}`);
       reset();
-      // router.push("/");
       location.reload();
     }
   }, [uploadTweetData, router]);
@@ -104,7 +100,7 @@ const Home: NextPage = () => {
                   </div>
 
                   <div className="">
-                    <Link href={`/tweets/${tweet.id}`} legacyBehavior>
+                    <Link href={`/tweet/${tweet.id}`} legacyBehavior>
                       <a className="">{tweet.content}</a>
                     </Link>
                     <div className="mt-5 flex space-x-2">
