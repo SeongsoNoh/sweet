@@ -1,0 +1,1 @@
+{"c":["pages/index","pages/tweets/[id]","webpack"],"r":["pages/tweets/[id]"],"m":["./lib/client/utils.ts","./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?absolutePagePath=%2FUsers%2Fsooo._.%2FDownloads%2Fnextjs-prisma-typescript-tailwind-blueprint%2Fpages%2Ftweets%2F%5Bid%5D.tsx&page=%2Ftweets%2F%5Bid%5D!","./pages/tweets/[id].tsx"]}

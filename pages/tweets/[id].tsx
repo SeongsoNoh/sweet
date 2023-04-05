@@ -39,7 +39,7 @@ interface AnswerResponse {
 }
 
 const TweetDetail: NextPage = () => {
-  const { user, isLoading } = useUser();
+  const {} = useUser();
   const router = useRouter();
   const { data, mutate } = useSWR<TweetDetailResponse>(
     router.query.id ? `/api/tweet/${router.query.id}` : null
@@ -56,7 +56,6 @@ const TweetDetail: NextPage = () => {
   const { register, handleSubmit, reset } = useForm<AnswerForm>();
   const onValid = (form: AnswerForm) => {
     sendAnswer(form);
-    // console.log(form);
   };
   useEffect(() => {
     if (answerData && answerData.ok) {
@@ -117,7 +116,7 @@ const TweetDetail: NextPage = () => {
           </div>
           <div className="mt-5 flex flex-col space-y-4">
             <div>{data?.tweet?.content}</div>
-            <div>{data?.tweet?.createAt}</div>
+            <div>{data?.tweet?.createAt.toString()}</div>
             <div className="border-t py-4 px-3 flex space-x-2 justify-between">
               <div className="flex space-x-2 items-center">
                 <svg
@@ -220,7 +219,7 @@ const TweetDetail: NextPage = () => {
                         </span>
                       </Link>
                       <span className="font-normal text-base text-gray-500">
-                        {answer.createAt}
+                        {answer.createAt.toString()}
                       </span>
                     </div>
                     <div className="">{answer.answer}</div>

@@ -16,8 +16,7 @@ interface MutationResult {
 }
 
 const Login: NextPage = () => {
-  const [create, { loading, data, error }] =
-    useMutation<MutationResult>("/api/user/create");
+  const [create, { data }] = useMutation<MutationResult>("/api/user/create");
   const { register, handleSubmit, reset } = useForm<CreateForm>();
   const onValid = (data: CreateForm) => {
     create(data);

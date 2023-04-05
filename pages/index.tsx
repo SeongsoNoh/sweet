@@ -3,7 +3,7 @@ import { Tweet, User } from "@prisma/client";
 import { NextPage } from "next";
 import Head from "next/head";
 import React, { useEffect } from "react";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 import Layout from "@components/layout";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -34,7 +34,7 @@ interface UploadTweetMutaite {
 }
 
 const Home: NextPage = () => {
-  const { user, isLoading } = useUser();
+  const {} = useUser();
   const { data, mutate } = useSWR<TweetResponse>("/api/tweet");
   const { register, handleSubmit, reset } = useForm<UploadTweet>();
   const [uploadTweet, { data: uploadTweetData }] =
@@ -96,7 +96,7 @@ const Home: NextPage = () => {
                       </span>
                     </Link>
                     <span className="font-normal text-base text-gray-500">
-                      {tweet.updateAt}
+                      {tweet.updateAt.toString()}
                     </span>
                   </div>
 
