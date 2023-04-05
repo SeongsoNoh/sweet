@@ -19,6 +19,7 @@ model User {
   updateAt  DateTime @updatedAt
   tweet     Tweet[]
   favs      Fav[]
+  answers   Answer[]
 }
 
 model Tweet{
@@ -30,6 +31,7 @@ model Tweet{
   image     String
   content   String
   favs      Fav[]
+  answers   Answer[]
 
   @@index([userId])
 }
@@ -42,6 +44,20 @@ model Fav {
   tweetId   Int
   createAt    DateTime @default(now())
   updateAt    DateTime @updatedAt
+
+  @@index([userId])
+  @@index([tweetId])
+}
+
+model Answer{
+  id        Int @id @default(autoincrement())
+  user      User @relation(fields: [userId], references: [id], onDelete:Cascade)
+  userId    Int
+  tweet     Tweet @relation(fields: [tweetId], references: [id], onDelete: Cascade)
+  tweetId   Int
+  answer    String 
+  createAt  DateTime @default(now())
+  updateAt  DateTime @updatedAt
 
   @@index([userId])
   @@index([tweetId])

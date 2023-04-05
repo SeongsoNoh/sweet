@@ -15,6 +15,12 @@ async function handler(
         content: true,
         updateAt: true,
         user: true,
+        _count: {
+          select: {
+            answers: true,
+            favs: true,
+          },
+        },
       },
       orderBy: [
         {

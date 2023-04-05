@@ -9,20 +9,12 @@ interface ItemProps {
   tweetDt: Date;
 }
 
-export default function Item({
-  content,
-  comments,
-  hearts,
-  id,
-  userName,
-  tweetDt,
-}: ItemProps) {
+export default function Item({ content, id, userName }: ItemProps) {
   return (
     <div className="border border-solid">
       <div>
         <img src="" alt="" />
         <span>{userName}</span>
-        <span>{tweetDt}</span>
       </div>
       <Link href={`/tweets/${id}`} legacyBehavior>
         <a className="">{content}</a>

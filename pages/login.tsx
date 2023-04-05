@@ -69,13 +69,13 @@ const Login: NextPage = () => {
           <input
             type="submit"
             value="로그인"
-            className="appearance-none w-full px-3 py-2 text-gray-800 bg-amber-300 border border-amber-300 rounded-md shadow-sm focus:ring-amber-300 focus:border-amber-300"
+            className="appearance-none w-full px-3 py-2 text-white tracking-widest font-semibold bg-amber-400 border border-amber-400 rounded-md shadow-sm focus:ring-amber-300 focus:border-amber-300"
           />
         </div>
       </form>
       <h2 className="mt-10 text-white">계정이 없으신가요?</h2>
       <button
-        className="appearance-none w-full py-2 px-3 text-gray-800 bg-amber-300 border border-amber-300 rounded-md shadow-sm focus:ring-amber-300 focus:border-amber-300"
+        className="appearance-none w-full mt-2 py-2 px-3 text-white tracking-widest font-semibold bg-amber-400 border border-amber-400 rounded-md shadow-sm focus:ring-amber-300 focus:border-amber-300"
         onClick={createClick}
       >
         가입하기

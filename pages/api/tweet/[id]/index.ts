@@ -22,6 +22,29 @@ async function handler(
           userName: true,
         },
       },
+      answers: {
+        select: {
+          answer: true,
+          id: true,
+          user: {
+            select: {
+              id: true,
+              userName: true,
+            },
+          },
+        },
+        orderBy: [
+          {
+            createAt: "desc",
+          },
+        ],
+      },
+      _count: {
+        select: {
+          answers: true,
+          favs: true,
+        },
+      },
     },
   });
   const isLiked = Boolean(
