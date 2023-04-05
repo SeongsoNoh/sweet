@@ -63,6 +63,10 @@ const TweetDetail: NextPage = () => {
       mutate();
     }
   }, [answerData, reset, mutate]);
+  const dateSubstr = (str: any) => {
+    str = String(str);
+    return str.substr(0, 10);
+  };
   return (
     <div className="flex ">
       <Layout hasTabBar></Layout>
@@ -116,7 +120,7 @@ const TweetDetail: NextPage = () => {
           </div>
           <div className="mt-5 flex flex-col space-y-4">
             <div>{data?.tweet?.content}</div>
-            <div>{data?.tweet?.createAt.toString()}</div>
+            <div>{dateSubstr(data?.tweet?.createAt)}</div>
             <div className="border-t py-4 px-3 flex space-x-2 justify-between">
               <div className="flex space-x-2 items-center">
                 <svg
@@ -212,19 +216,19 @@ const TweetDetail: NextPage = () => {
                 />
                 <div className="flex justify-between gap-3 w-full items-center">
                   <div className="flex flex-col ">
-                    <div className="">
+                    <div className="flex space-x-3 items-center">
                       <Link href={`/profile`} legacyBehavior>
                         <span className="font-medium text-lg">
                           {answer?.user?.userName}
                         </span>
                       </Link>
                       <span className="font-normal text-base text-gray-500">
-                        {answer.createAt.toString()}
+                        {dateSubstr(answer?.createAt)}
                       </span>
                     </div>
                     <div className="">{answer.answer}</div>
                   </div>
-                  <div className="mr-4">
+                  {/* <div className="mr-4">
                     <svg
                       fill="none"
                       stroke="currentColor"
@@ -237,7 +241,7 @@ const TweetDetail: NextPage = () => {
                         d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
                       ></path>
                     </svg>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             ))}

@@ -21,13 +21,13 @@ export default function withHandler({
     req: NextApiRequest,
     res: NextApiResponse
   ): Promise<any> {
-    console.log(req.session);
+    console.log(isPrivate);
     if (req.method && !methods.includes(req.method as any)) {
       return res.status(405).end();
     }
-    if (isPrivate) {
-      return res.status(401).json({ ok: false, error: "Plz log in." });
-    }
+    // if (isPrivate && !req.session.user) {
+    //   return res.status(401).json({ ok: false, error: "Plz log in." });
+    // }
     try {
       await handler(req, res);
     } catch (error) {
