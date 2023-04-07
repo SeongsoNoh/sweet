@@ -66,6 +66,7 @@ const Home: NextPage = () => {
                 type="text"
                 placeholder="무슨 일이 일어나고 있나요?"
                 className=" p-5 h-32 bg-violet-50"
+                id="content"
                 {...register("content")}
               />
               <input
