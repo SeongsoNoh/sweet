@@ -14,12 +14,10 @@ async function handler(
     },
   });
   if (!foundUser) {
-    return res
-      .status(409)
-      .json({
-        ok: false,
-        error: "없는 계정입니다. 가입후 다시 로그인해주세요.",
-      });
+    return res.status(409).json({
+      ok: false,
+      error: "없는 계정입니다. 가입후 다시 로그인해주세요.",
+    });
   } else {
     req.session.user = {
       id: foundUser.id,

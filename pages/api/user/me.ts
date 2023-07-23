@@ -22,7 +22,6 @@ async function handler(
     res.json({ ok: false });
   }
 }
-
 export default withApiSession(
   withHandler({ methods: ["GET", "POST"], handler })
 );
