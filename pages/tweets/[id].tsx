@@ -1,13 +1,14 @@
-import Layout from "@components/layout";
+import Layout from "@components/Layout";
 import useMutation from "@lib/client/useMutation";
 import useUser from "@lib/client/useUser";
 import { cls } from "@lib/client/utils";
 import { Answer, Tweet, User } from "@prisma/client";
+import moment from "moment";
 import { NextPage } from "next";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { BsTrash } from "react-icons/bs";
 import useSWR from "swr";
 
 interface AnswerWithUser extends Answer {
@@ -39,7 +40,7 @@ interface AnswerResponse {
 }
 
 const TweetDetail: NextPage = () => {
-  const {} = useUser();
+  const { user } = useUser();
   const router = useRouter();
   const { data, mutate } = useSWR<TweetDetailResponse>(
     router.query.id ? `/api/tweet/${router.query.id}` : null
@@ -57,22 +58,31 @@ const TweetDetail: NextPage = () => {
   const onValid = (form: AnswerForm) => {
     sendAnswer(form);
   };
+  const [deleteBtn] = useMutation(`/api/tweet/${router.query.id}/delete`);
+
+  const deleteClick = () => {
+    if (window.confirm("삭제하시겠습니까?")) {
+      deleteBtn({});
+      alert("삭제되었습니다.");
+      router.push("/");
+    } else {
+      alert("취소되었습니다.");
+    }
+  };
+
   useEffect(() => {
     if (answerData && answerData.ok) {
       reset();
       mutate();
     }
   }, [answerData, reset, mutate]);
-  const dateSubstr = (str: any) => {
-    str = String(str);
-    return str.substr(0, 10);
-  };
+
   return (
-    <div className="flex ">
-      <Layout hasTabBar></Layout>
+    <div className="flex flex-col">
+      <Layout />
       <div className="w-full space-y-7">
         <div className="flex p-4 space-x-7 items-center fixed border-b w-full h-12 bg-white">
-          <Link href="/" legacyBehavior>
+          <div onClick={() => router.back()}>
             <svg
               fill="none"
               stroke="currentColor"
@@ -86,11 +96,11 @@ const TweetDetail: NextPage = () => {
                 d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
               ></path>
             </svg>
-          </Link>
+          </div>
           <span className="font-extrabold text-xl">트윗</span>
         </div>
-        <div className="pt-8 px-4">
-          <div className="flex justify-between mt-2">
+        <div className="pt-8 px-6">
+          <div className="flex justify-between mt-2 items-center">
             <div className="flex space-x-4">
               <img
                 src="https://pbs.twimg.com/profile_images/1488548719062654976/u6qfBBkF_400x400.jpg"
@@ -104,23 +114,17 @@ const TweetDetail: NextPage = () => {
                 </span>
               </div>
             </div>
-            <svg
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              viewBox="0 0 24 24"
-              className="w-10 h-10"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-              ></path>
-            </svg>
+            {user?.id === data?.tweet.user.id ? (
+              <div onClick={deleteClick} className="cursor-pointer">
+                <BsTrash size={20} />
+              </div>
+            ) : null}
           </div>
           <div className="mt-5 flex flex-col space-y-4">
             <div>{data?.tweet?.content}</div>
-            <div>{dateSubstr(data?.tweet?.createAt)}</div>
+            <div className="text-slate-600">
+              {moment(data?.tweet?.createAt).format("YYYY.MM.DD")}
+            </div>
             <div className="border-t py-4 px-3 flex space-x-2 justify-between">
               <div className="flex space-x-2 items-center">
                 <svg
@@ -217,31 +221,19 @@ const TweetDetail: NextPage = () => {
                 <div className="flex justify-between gap-3 w-full items-center">
                   <div className="flex flex-col ">
                     <div className="flex space-x-3 items-center">
-                      <Link href={`/profile`} legacyBehavior>
+                      {/* <Link href={`/profile`} legacyBehavior> */}
+                      <div>
                         <span className="font-medium text-lg">
                           {answer?.user?.userName}
                         </span>
-                      </Link>
+                      </div>
+                      {/* </Link> */}
                       <span className="font-normal text-base text-gray-500">
-                        {dateSubstr(answer?.createAt)}
+                        {moment(answer?.createAt).format("YYYY.MM.DD")}
                       </span>
                     </div>
                     <div className="">{answer.answer}</div>
                   </div>
-                  {/* <div className="mr-4">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                      ></path>
-                    </svg>
-                  </div> */}
                 </div>
               </div>
             ))}
