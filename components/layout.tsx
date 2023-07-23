@@ -1,8 +1,6 @@
 import { motion, useCycle } from "framer-motion";
-import { themeState } from "pages/atoms";
 import React from "react";
-import { BsSunFill, BsMoonFill, BsPerson, BsX } from "react-icons/bs";
-import { useRecoilState } from "recoil";
+import { BsPerson, BsX } from "react-icons/bs";
 import Mypage from "./Mypage";
 import { useRouter } from "next/router";
 
@@ -27,11 +25,6 @@ const sidebar = {
 };
 
 export default function Layout() {
-  // const [isDarkMode, setIsDarkMode] = useRecoilState(themeState);
-  // const handleDarkMode = () => {
-  //   setIsDarkMode(!isDarkMode);
-  //   localStorage.setItem("isDarkMode", JSON.stringify(!isDarkMode));
-  // };
   const [isOpen, toggleOpen] = useCycle(false, true);
   const router = useRouter();
   const homeClick = () => {
@@ -55,14 +48,6 @@ export default function Layout() {
           </svg>
         </h2>
         <div></div>
-        {/* <motion.button
-          onClick={handleDarkMode}
-          className="flex justify-center items-center text-base bg-transparent cursor-pointer"
-          whileHover={{ scale: 1.3, transition: { duration: 0.5 } }}
-          transition={{ duration: 0.5 }}
-        >
-          {isDarkMode ? <BsSunFill className="" /> : <BsMoonFill />}
-        </motion.button> */}
       </div>
       <div>
         {isOpen ? (
