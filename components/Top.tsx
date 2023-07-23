@@ -24,7 +24,7 @@ const sidebar = {
   },
 };
 
-export default function Layout() {
+export default function Top() {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const router = useRouter();
   const homeClick = () => {

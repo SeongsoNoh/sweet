@@ -1,4 +1,4 @@
-import Layout from "@components/Layout";
+import Top from "@components/Top";
 import useMutation from "@lib/client/useMutation";
 import useUser from "@lib/client/useUser";
 import { cls } from "@lib/client/utils";
@@ -79,7 +79,7 @@ const TweetDetail: NextPage = () => {
 
   return (
     <div className="flex flex-col">
-      <Layout />
+      <Top />
       <div className="w-full space-y-7">
         <div className="flex p-4 space-x-7 items-center fixed border-b w-full h-12 bg-white">
           <div onClick={() => router.back()}>

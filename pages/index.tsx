@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import useMutation from "@lib/client/useMutation";
 import router from "next/router";
 import Tweets from "@components/Tweets";
-import Layout from "@components/Layout";
+import Top from "@components/Top";
 
 interface UploadTweet {
   content: string;
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <div className="flex flex-col h-screen ">
-        <Layout />
+        <Top />
         <div className="flex h-full">
           <div className="flex flex-col w-full relative z-0">
             <form
